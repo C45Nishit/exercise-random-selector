@@ -84,7 +84,7 @@ app_mode = st.sidebar.radio(
 if app_mode == "⚡ Run Random Exercise Selector":
     st.title("🏋️‍♂️ Random Exercise Selector")
 
-    unique_options = sorted(x=df['target'].unique().tolist())
+    unique_options = sorted(df['target'].unique().tolist())
 
 
     # Dropdown input from user
@@ -187,7 +187,7 @@ elif app_mode == "➕ Append New Exercise Data":
 
     if submit_data:
         # Pre-execution structural checks
-        clean_title = clean_text(exercise_title)
+        clean_title = clean_text(name)
         
         # Validation Guardrails
         if not clean_title:
