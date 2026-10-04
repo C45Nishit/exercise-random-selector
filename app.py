@@ -37,7 +37,7 @@ if not st.session_state.logged_in:
     if st.button("Login"):
         if (
             user_id == "PictureDivinity"
-            and "ImagineInfinity" == user_password
+            and "imagineinfinity" == user_password
         ):
             st.session_state.logged_in = True
             st.session_state.user_id = user_id
