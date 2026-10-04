@@ -214,7 +214,7 @@ elif app_mode == "➕ Append New Exercise Data":
             new_df_row = pd.DataFrame([new_row])
             simulated_updated_df = pd.concat([df, new_df_row], ignore_index=True)
 
-            # NOTE: Because it is an unauthenticated Google Sheet link, pd.to_csv(GSHEET_CSV_URL)
+            pd.to_csv(GSHEET_CSV_URL)
             # will return an HTTP Error. To append this live, you will want to replace the rows below
             # with your exact Google Sheet updating script block!
             st.success("Data successfully verified, scrubbed, and processed!")
