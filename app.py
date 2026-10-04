@@ -3,14 +3,12 @@ import pandas as pd
 import streamlit as st
 import requests
 # =============================================================================
-# 1. SECURITY & DATA SANITIZATION UTILITIES
+#  SECURITY & DATA SANITIZATION UTILITIES
 # =============================================================================
 
 def clean_text(text: str) -> str:
-    """Removes problematic characters like tabs, newlines, and trailing spaces
-
-    that break CSV/Google Sheets parsers.
-    """
+    """Removes problematic characters like tabs, newlines, and trailing spaces that break CSV/Google Sheets parsers."""
+    
     if not text:
         return ""
     # Strip leading/trailing whitespaces
@@ -23,7 +21,7 @@ def clean_text(text: str) -> str:
 
 
 # =============================================================================
-# 2. LOGIN GATEWAY
+#  LOGIN GATEWAY
 # =============================================================================
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
@@ -47,7 +45,7 @@ if not st.session_state.logged_in:
     st.stop()  # Halt execution until logged in
 
 # =============================================================================
-# 3. CORE DATA LOADING
+#  CORE DATA LOADING
 # =============================================================================
 # Direct live CSV conversion link from your public-but-obscured Google Sheet
 GSHEET_CSV_URL = (
@@ -79,7 +77,7 @@ app_mode = st.sidebar.radio(
 )
 
 # =============================================================================
-# MODE A: MAIN LOGIC / ANALYTICS
+# MODE A: MAIN LOGIC / RANDOMIZER
 # =============================================================================
 if app_mode == "⚡ Run Random Exercise Selector":
     st.title("🏋️‍♂️ Random Exercise Selector")
@@ -165,12 +163,6 @@ elif app_mode == "➕ Append New Exercise Data":
             "Warmup cooldown or neither:",
             ["Neither", "Cooldown","Warmup"],
         )
-        if warmup =="Warmup":
-            warmup="up"
-        elif warmup== "Cooldown":
-            warmup="down"
-        else:
-            warmup="null"
         
         # 2. Integer Input with Range Constraints (e.g., between 1 and 10 sets)
         time = st.number_input(
@@ -189,7 +181,12 @@ elif app_mode == "➕ Append New Exercise Data":
     if submit_data:
         # Pre-execution structural checks
         clean_title = clean_text(name)
-        
+        if warmup =="Warmup":
+            warmup="up"
+        elif warmup== "Cooldown":
+            warmup="down"
+        else:
+            warmup="null"
         # Validation Guardrails
         if not clean_title:
             st.error("Submission failed: 'Exercise Name' empty or invalid.")
