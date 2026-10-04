@@ -209,7 +209,7 @@ elif app_mode == "➕ Append New Exercise Data":
             # --- HOW DATA IS APPENDED ---
             
 
-            link="https://script.google.com/macros/s/AKfycbw93ly1BpLCV0m3qOEo5cXnElfxveuAc5PHy2vudebNlZp9FEoTQLEQC199GSzLJJ6atA/exec"
+            link="https://script.google.com/macros/s/AKfycbzRiCXCMJZy8O68bFs8X0q4xji4Vrb1Vq7J3V_-Gz_d-rsNS5MuZhIwq7wI3J35-0X5-g/exec"
             try:
                 response = requests.post(link, json=new_row)
                 if response.text == "Success":
