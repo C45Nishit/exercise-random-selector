@@ -123,8 +123,8 @@ if app_mode == "⚡ Run Random Exercise Selector":
             time=sum(p1['time'])+sum(p2['time'])+sum(p3['time'])
         #     print(time)
         
-        result=pd.concat([p1,p2,p3], time)
-        return result
+        result=pd.concat([p1,p2,p3])
+        return (result, time)
 
     # Run execution and display results
     if st.button("Execute Process"):
