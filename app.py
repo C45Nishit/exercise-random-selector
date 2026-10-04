@@ -36,8 +36,8 @@ if not st.session_state.logged_in:
 
     if st.button("Login"):
         if (
-            user_id == "id"
-            and "pass" == user_password
+            user_id == "PictureDivinity"
+            and "ImagineInfinity" == user_password
         ):
             st.session_state.logged_in = True
             st.session_state.user_id = user_id
@@ -124,6 +124,7 @@ if app_mode == "⚡ Run Random Exercise Selector":
         #     print(time)
         
         result=pd.concat([p1,p2,p3])
+        result.index=range(1,len(result)+1)
         return (result, time)
 
     # Run execution and display results
