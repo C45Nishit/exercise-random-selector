@@ -1,7 +1,7 @@
 import re
 import pandas as pd
 import streamlit as st
-
+import requests
 # =============================================================================
 # 1. SECURITY & DATA SANITIZATION UTILITIES
 # =============================================================================
@@ -210,13 +210,21 @@ elif app_mode == "➕ Append New Exercise Data":
             }
 
             # --- HOW DATA IS APPENDED ---
-            # Standard dataframe appending locally for display simulation
-            new_df_row = pd.DataFrame([new_row])
-            simulated_updated_df = pd.concat([df, new_df_row], ignore_index=True)
+            
 
-            pd.to_csv(GSHEET_CSV_URL)
+            link="https://script.google.com/macros/s/AKfycbzRiCXCMJZy8O68bFs8X0q4xji4Vrb1Vq7J3V_-Gz_d-rsNS5MuZhIwq7wI3J35-0X5-g/exec"
+            try:
+                response = requests.post(link, json=new_row)
+                if response.text == "Success":
+                    st.success(
+                    f"Successfully saved '{name}' permanently to your Google Sheet!"
+                )
+                    st.cache_data.clear()  # Wipes the website cache so the new row loads immediately
+                    st.rerun()
+                else:
+                    st.error("Sheet rejected the update. Check deployment access.")
+            except Exception as e:
+                st.error(f"Failed to communicate with Google Sheets: {e}")
             # will return an HTTP Error. To append this live, you will want to replace the rows below
             # with your exact Google Sheet updating script block!
-            st.success("Data successfully verified, scrubbed, and processed!")
-            st.subheader("Preview of Appended Line Item:")
-            st.json(new_row)
+            
