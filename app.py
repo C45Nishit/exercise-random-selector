@@ -149,7 +149,7 @@ elif app_mode == "➕ Append New Exercise Data":
         # 1. Dropdown Menu Input
         target = st.selectbox(
             "Target Muscle:",
-            ["Chest", "Back", "Legs", "Shoulders", "Arms", "Core"],
+            ["chest", "back", "legs", "shoulders", "arms", "core"],
         )
         
         name = st.text_input("Exercise Name (Text Entry):")
